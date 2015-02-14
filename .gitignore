@@ -1,5 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 
+### Kubuntu Dolphin settings
+.directory
+
 ### Composer template
 composer.phar
 vendor/

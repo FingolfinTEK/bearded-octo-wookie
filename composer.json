@@ -1,0 +1,15 @@
+{
+  "name": "hashcode/website",
+  "description": "Website",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "require": {
+    "phpmailer/phpmailer": "dev-master"
+  },
+  "authors": [
+    {
+      "name": "Miloš Milivojević",
+      "email": "fingolfintek@gmail.com"
+    }
+  ]
+}
