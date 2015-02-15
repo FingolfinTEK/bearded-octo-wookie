@@ -395,17 +395,14 @@ header {
     border-radius: 5px 5px 0 0;
 }
 
-.easyPieChart {
-    position: relative;
-}
-
-.easyPieChart canvas {
+.chart canvas {
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .chart {
+    position: relative;
     margin: 10px auto;
     font-size: 14px;
     font-weight: bold;
@@ -587,7 +584,7 @@ header {
 }
 
 .blockquote-reverse p {
-    font-size: 22px;
+    font-size: 16px;
 }
 
 .blockquote-reverse p i {
