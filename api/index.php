@@ -6,22 +6,15 @@
  * Time: 00.46
  */
 require_once __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . "/model/Quote.php";
+require __DIR__ . "/../application/model/Quote.php";
+require __DIR__ . "/../application/DB.php";
 
 use Respect\Rest\Router;
 
 $r3 = new Router("/api");
 $r3->get('/quotes', function () {
-    $database = new medoo([
-        'database_type' => 'mysql',
-        'database_name' => 'hashcode_website',
-        'server' => 'localhost',
-        'username' => 'hashcode_admin',
-        'password' => 'hcHithlum19',
-        'charset' => 'utf8'
-    ]);
-
-    $resultSet = $database->select("quotes", [
+    $db = new DB();
+    $resultSet = $db->select("quotes", [
         "author",
         "quote_text"
     ]);

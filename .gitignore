@@ -3,6 +3,9 @@
 ### Kubuntu Dolphin settings
 .directory
 
+### Configuration directory
+config
+
 ### Composer template
 composer.phar
 vendor/
