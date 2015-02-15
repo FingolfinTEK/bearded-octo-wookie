@@ -4,7 +4,9 @@
   "minimum-stability": "stable",
   "license": "proprietary",
   "require": {
-    "phpmailer/phpmailer": "dev-master"
+    "phpmailer/phpmailer": "5.2.9",
+    "respect/rest": "0.6.0",
+    "catfan/medoo": "0.9.8"
   },
   "authors": [
     {
