@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="website">
 <head>
     <!-- ==========================
     	Meta Tags 
@@ -191,60 +191,21 @@
                         engine, effective interest rate calculator or an idea management software.
                     </p>
 
-                    <div class="quotes">
+                    <div class="quotes" ng-controller="QuotesController">
                         <div class="media">
                             <div class="media-body">
                                 <div class="carousel slide" data-ride="carousel"
                                      data-interval="10000">
                                     <div class="carousel-inner">
                                         <!-- Slideshow item 1 active -->
-                                        <div class="item active">
+                                        <div ng-repeat="quote in quotes"
+                                             ng-class="{true:'item active', false:'item'}[$first]">
                                             <blockquote class="blockquote-reverse">
                                                 <p>
                                                     <i class="fa fa-quote-left"></i>
-                                                    Most managers want good code, even when they are
-                                                    obsessing about the schedule. They may defend
-                                                    the schedule and requirements with passion; but
-                                                    that’s their job. It’s your job to defend the
-                                                    code with equal passion.
+                                                    {{quote.quote}}
                                                 </p>
-                                                <footer> Uncle Bob</footer>
-                                            </blockquote>
-                                        </div>
-                                        <!-- Slideshow item 2 -->
-                                        <div class="item">
-                                            <blockquote class="blockquote-reverse">
-                                                <p>
-                                                    <i class="fa fa-quote-left"></i>
-                                                    The bad news is that writing clean code is a lot
-                                                    like painting a picture. Most of us know when a
-                                                    picture is painted well or badly. But being able
-                                                    to recognize good art from bad does not mean
-                                                    that we know how to paint. So too being able to
-                                                    recognize clean code from dirty code does not
-                                                    mean that we know how to write clean code!
-                                                </p>
-                                                <footer> Uncle Bob</footer>
-                                            </blockquote>
-                                        </div>
-
-                                        <!-- Slideshow item 3 -->
-                                        <div class="item">
-                                            <blockquote class="blockquote-reverse">
-                                                <p>
-                                                    <i class="fa fa-quote-left"></i>
-                                                    Why does good code rot so quickly into bad code?
-                                                    We have lots of explanations for it. We complain
-                                                    that the requirements changed in ways that
-                                                    thwart the original design. We bemoan the
-                                                    schedules that were too tight to do things
-                                                    right. We blather about stupid managers and
-                                                    intolerant customers and useless marketing types
-                                                    and telephone sanitizers. But the fault, dear
-                                                    Dilbert, is not in our stars, but in ourselves.
-                                                    We are unprofessional.
-                                                </p>
-                                                <footer> Uncle Bob</footer>
+                                                <footer>{{quote.author}}</footer>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -288,7 +249,7 @@
 
                         <div class="event">
                             <div class="event-info">
-                                <div class="date">2010</div>
+                                <div class="date">2012</div>
                             </div>
                             <span>Full-time Java Developer at 
                                 <a href="http://www.seavus.com">Seavus</a> </span>
@@ -695,9 +656,9 @@
     <!-- ==========================
     	JS 
     =========================== -->
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
     <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/countto/jquery.countTo.js"></script>
@@ -707,6 +668,8 @@
     <script src="bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
     <!--<script src="js/jquery.easy-pie-chart.js"></script>-->
     <script src="js/custom.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controller.js"></script>
     <script>
         $(function () {
             $("input,textarea").jqBootstrapValidation({
