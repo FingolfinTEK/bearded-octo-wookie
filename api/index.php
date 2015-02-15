@@ -5,14 +5,21 @@
  * Date: 14.2.15.
  * Time: 00.46
  */
-require_once __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . "/../application/model/Quote.php";
-require __DIR__ . "/../application/DB.php";
+require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../application/model/Quote.php";
+require_once __DIR__ . "/../application/service/Mailer.php";
+require_once __DIR__ . "/../application/DB.php";
 
 use Respect\Rest\Router;
 
-$r3 = new Router("/api");
-$r3->get('/quotes', function () {
+$router = new Router("/api");
+
+$router->post("/contact", function() {
+    $mailer = new Mailer();
+    $mailer->sendMail();
+});
+
+$router->get("/quotes", function () {
     $db = new DB();
     $resultSet = $db->select("quotes", [
         "author",

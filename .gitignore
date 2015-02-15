@@ -4,7 +4,7 @@
 .directory
 
 ### Configuration directory
-config
+config/
 
 ### Composer template
 composer.phar
