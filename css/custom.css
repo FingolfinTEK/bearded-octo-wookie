@@ -67,7 +67,6 @@ h4 {
     color: #2a3f54;
     border-top: 8px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2);
-    text-align: center;
 }
 
 .content-second h2 {
@@ -1017,6 +1016,12 @@ blockquote footer {
     margin: 0;
     padding: 12px 0;
     font-weight: bold;
+}
+
+#contact .contact-info i {
+    font-size: large;
+    color: #2a3f54;
+    padding: 5px 5px 5px 5px;
 }
 
 #contact .contact-info p:last-child {
