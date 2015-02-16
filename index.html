@@ -216,69 +216,19 @@
                 </div>
                 <!-- Profile description end-->
 
-                <div class="col-md-3 col-sm-4 scrollpoint sp-effect2"><!--Timeline-->
-
-                    <div class="timeline">
-                        <div class="event">
+                <div class="col-md-3 col-sm-4 scrollpoint sp-effect2">
+                    <!--Timeline-->
+                    <div class="timeline" ng-controller="CareerEventsController">
+                        <div class="event" ng-repeat="event in careerEvents">
                             <div class="event-info">
-                                <div class="date">2009</div>
+                                <div class="date">{{event.year}}</div>
                             </div>
-                            <span>
-                                BSc in software engineering from University 
-                                of Belgrade School of Electrical Engineering
-                            </span>
+                            <span ng-bind-html="event.description"></span>
                         </div>
-
-                        <div class="event">
-                            <div class="event-info">
-                                <div class="date">2010</div>
-                            </div>
-                            <span>Full-time Java Developer at 
-                                <a href="http://www.croz.net/eng/">Croz</a> </span>
-                        </div>
-
-                        <div class="event">
-                            <div class="event-info">
-                                <div class="date">2012</div>
-                            </div>
-                            <span>
-                                MSc in software engineering from University 
-                                of Belgrade School of Electrical Engineering
-                            </span>
-                        </div>
-
-                        <div class="event">
-                            <div class="event-info">
-                                <div class="date">2012</div>
-                            </div>
-                            <span>Full-time Java Developer at 
-                                <a href="http://www.seavus.com">Seavus</a> </span>
-                        </div>
-
-                        <div class="event">
-                            <div class="event-info">
-                                <div class="date">2013</div>
-                            </div>
-                            <span>
-                                Started freelancing part-time at 
-                                <a href="https://www.freelancer.com/u/fingolfintek.html">Freelancer.com</a>
-                            </span>
-                        </div>
-
-                        <div class="event">
-                            <div class="event-info">
-                                <div class="date">2014</div>
-                            </div>
-                            <span>Full-time Senior Backend Developer at 
-                                <a href="http://www.deployinc.com">Deploy Inc.</a> </span>
-                        </div>
-
-
                     </div>
-                    <!--timeline-->
+                    <!--Timeline end-->
                 </div>
                 <!--col 3 end-->
-
             </div>
             <!--Row about end-->
 
@@ -666,7 +616,6 @@
     <script src="js/creative-brands.js"></script>
     <script src="bower_components/jqBootstrapValidation/dist/jqBootstrapValidation-1.3.7.min.js"></script>
     <script src="bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-    <!--<script src="js/jquery.easy-pie-chart.js"></script>-->
     <script src="js/custom.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controller.js"></script>
@@ -683,33 +632,29 @@
                     var email = $("input#email").val();
                     var message = $("textarea#message").val();
 
-                    $.ajax({
-                        url: "/api/contact",
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        data: JSON.stringify({
-                            firstname: firstname,
-                            lastname: lastname,
-                            email: email,
-                            message: message
-                        }),
-                        cache: false,
-                        success: function () {
-                            // Success message
-                            $('.contact-alert').html("<div class='alert alert-success'>");
-                            $('.contact-alert > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'><i class='fa fa-times'></i></button><strong>Your message has been sent.</strong></div>");
-                            //clear all fields
-                            $('#contactForm').trigger("reset");
-                        },
-                        error: function () {
-                            // Fail message
-                            $('.contact-alert').html("<div class='alert alert-danger'>");
-                            $('.contact-alert > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'><i class='fa fa-times'></i></button><strong>Sorry, it seems that my mail server is not responding. Please try again later!</strong></div>");
-                            //clear all fields
-                            $('#contactForm').trigger("reset");
+                    function showEmailSuccessMessage() {
+                        $('.contact-alert').html("<div class='alert alert-success'>");
+                        $('.contact-alert > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'><i class='fa fa-times'></i></button><strong>Your message has been sent.</strong></div>");
+                    }
+
+                    function showEmailFailMessage() {
+                        $('.contact-alert').html("<div class='alert alert-danger'>");
+                        $('.contact-alert > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'><i class='fa fa-times'></i></button><strong>Sorry, it seems that my mail server is not responding. Please try again later!</strong></div>");
+                    }
+
+                    $.post("/api/contact", JSON.stringify({
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        message: message
+                    }), "json").always(function (data) {
+                        if (data.indexOf("Error") == -1) {
+                            showEmailSuccessMessage();
+                        } else {
+                            showEmailFailMessage();
                         }
-                    })
+                        $('#contactForm').trigger("reset");
+                    });
                 }
             });
         });
