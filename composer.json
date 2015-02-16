@@ -6,7 +6,8 @@
   "require": {
     "phpmailer/phpmailer": "5.2.9",
     "respect/rest": "0.6.0",
-    "catfan/medoo": "0.9.8"
+    "catfan/medoo": "0.9.8",
+    "katzgrau/klogger": "1.0.0"
   },
   "authors": [
     {

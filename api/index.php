@@ -14,12 +14,15 @@ use Respect\Rest\Router;
 
 $router = new Router("/api");
 
-$router->post("/contact", function() {
+$router->post("/contact", function () {
     $mailer = new Mailer();
     $mailer->sendMail();
 });
 
 $router->get("/quotes", function () {
+    $logger = new Katzgrau\KLogger\Logger(__DIR__ . '/../../logs');
+    $logger->info("Fetching quotes");
+    
     $db = new DB();
     $resultSet = $db->select("quotes", [
         "author",
@@ -27,6 +30,7 @@ $router->get("/quotes", function () {
     ]);
 
     $quotes = [];
+    $logger->info("Found " . count($resultSet) . " quotes");
     foreach ($resultSet as $record) {
         array_push($quotes, new Quote($record["author"], $record["quote_text"]));
     }

@@ -3,8 +3,9 @@
 ### Kubuntu Dolphin settings
 .directory
 
-### Configuration directory
+### Local directories
 config/
+logs/
 
 ### Composer template
 composer.phar
