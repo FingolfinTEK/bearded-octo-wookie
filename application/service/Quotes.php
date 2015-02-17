@@ -6,47 +6,23 @@
  * Date: 16.2.15.
  * Time: 10.29
  */
-class Quotes
+
+require_once "BaseDbService.php";
+require_once __DIR__ . "/../model/Quote.php";
+
+class Quotes extends BaseDbService
 {
     function __construct()
     {
-        $this->logger = new Katzgrau\KLogger\Logger(__DIR__ . '/../../../logs');
+        parent::__construct("quotes", ["author", "quote_text"]);
     }
 
     /**
-     * @return array
+     * @param $record
+     * @return Testimonial
      */
-    public function getQuotesFromDb()
+    protected function mapSingleRecord($record)
     {
-        $this->logger->info("Fetching quotes");
-        $resultSet = $this->fetchFromDb();
-
-        $this->logger->info("Found " . count($resultSet) . " quotes");
-        return $this->mapToQuotes($resultSet);
-    }
-
-    /**
-     * @return array|bool
-     */
-    private function fetchFromDb()
-    {
-        $db = new DB();
-        return $db->select("quotes", [
-            "author",
-            "quote_text"
-        ]);
-    }
-
-    /**
-     * @param $resultSet
-     * @return array
-     */
-    private function mapToQuotes($resultSet)
-    {
-        $quotes = [];
-        foreach ($resultSet as $record) {
-            array_push($quotes, new Quote($record["author"], $record["quote_text"]));
-        }
-        return $quotes;
+        return new Quote($record["author"], $record["quote_text"]);
     }
 }

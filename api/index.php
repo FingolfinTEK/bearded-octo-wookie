@@ -5,13 +5,12 @@
  * Date: 14.2.15.
  * Time: 00.46
  */
+
 require_once __DIR__ . "/../vendor/autoload.php";
-require_once __DIR__ . "/../application/model/Quote.php";
-require_once __DIR__ . "/../application/model/CareerEvent.php";
 require_once __DIR__ . "/../application/service/Mailer.php";
 require_once __DIR__ . "/../application/service/Quotes.php";
 require_once __DIR__ . "/../application/service/CareerEvents.php";
-require_once __DIR__ . "/../application/DB.php";
+require_once __DIR__ . "/../application/service/Testimonials.php";
 
 use Respect\Rest\Router;
 
@@ -23,11 +22,22 @@ $router->post("/contact", function () {
 });
 
 $router->get("/quotes", function () {
-    $quotes = new Quotes();
-    return json_encode($quotes->getQuotesFromDb());
+    return getJsonFromService(new Quotes());
 });
 
 $router->get("/career-events", function () {
-    $events = new CareerEvents();
-    return json_encode($events->getCareerEventsFromDb());
+    return getJsonFromService(new CareerEvents());
 });
+
+$router->get("/testimonials", function () {
+    return getJsonFromService(new Testimonials());
+});
+
+/**
+ * @param $service BaseDbService
+ * @return string
+ */
+function getJsonFromService($service)
+{
+    return json_encode($service->getDataFromDb());
+}

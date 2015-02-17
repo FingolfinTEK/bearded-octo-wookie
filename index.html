@@ -34,8 +34,8 @@
     <!-- ==========================
     	CSS 
     =========================== -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="css/animate.css" rel="stylesheet" type="text/css">
     <link href="css/creative-brands.css" rel="stylesheet" type="text/css">
     <link href="css/vertical-carousel.css" rel="stylesheet" type="text/css">
@@ -65,15 +65,15 @@
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavigation">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                         <i class="fa fa-bars"></i>
                     </button>
                     <img src="image/fingolfintek.png" class="navbar-logo pull-left" alt=""/>
-                    <a href="/" class="navbar-brand animated flipInX">Miloš Milivojević</a>
+                    <a href="#page-top" class="navbar-brand">Miloš Milivojević</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="myNavigation">
+                <div class="collapse navbar-collapse" id="navigation">
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -205,7 +205,7 @@
                                                     <i class="fa fa-quote-left"></i>
                                                     {{quote.quote}}
                                                 </p>
-                                                <footer>{{quote.author}}</footer>
+                                                <footer><cite>{{quote.author}}</cite></footer>
                                             </blockquote>
                                         </div>
                                     </div>
@@ -247,25 +247,7 @@
     </section>
 
     <section id="skills" class="content-first">
-        <div class="container">
-            <div class="row"><!-- Toogle my skills start -->
-                <div class="col-md-3">
-                    <div class="chart" data-percent="73">73% CSS</div>
-                </div>
-                <div class="col-md-3">
-                    <div class="chart" data-percent="89">89% Html</div>
-                </div>
-                <div class="col-md-3">
-                    <div class="chart" data-percent="83">83% Code</div>
-                </div>
-                <div class="col-md-3">
-                    <div class="chart" data-percent="62">62% Design</div>
-                </div>
-            </div>
-            <!-- Toogle my skills end-->
 
-        </div>
-        <!-- Container end-->
     </section>
     <!-- ==========================
     	ABOUT - END 
@@ -399,55 +381,33 @@
     =========================== -->
     <section id="testimonials" class="content-first">
         <div class="container">
-            <h2 class="scrollpoint sp-effect3 text-center">Testimonials</h2>
+            <h2 class="scrollpoint sp-effect3 text-center">
+                Testimonials
+            </h2>
 
-            <p class="scrollpoint sp-effect3 text-center">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Fusce in turpis quam. Nulla quis eleifend lectus.</p>
+            <p class="scrollpoint sp-effect3 text-center">
+            </p>
 
-            <div class="row">
+            <div class="row scrollpoint active sp-effect3" ng-controller="TestimonialsController">
 
                 <!-- TESTIMONIAL 1 - START -->
-                <div class="col-sm-6 scrollpoint sp-effect1">
+                <div ng-repeat="testimonial in testimonials"
+                     class="col-sm-6">
                     <div class="media">
-                        <a class="pull-left" href="#">
+                        <a class="pull-left" ng-href="{{testimonial.testimonialUrl}}">
                             <img class="media-object img-circle"
-                                 src="image/tom.png" alt="">
+                                 ng-src="{{testimonial.imageUrl}}" alt="">
                         </a>
 
                         <div class="media-body">
-                            <h4 class="media-heading">Miloš Milivojević</h4>
-                            <span>Webdesigner</span>
+                            <h4 class="media-heading">{{testimonial.author}}</h4>
+                            <span>{{testimonial.authorTitle}}</span>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed
-                                volutpat est. Donec lobortis interdum volutpat. Maecenas bibendum
-                                dui quis pharetra tincidunt. Praesent posuere eu velit at
-                                scelerisque.</p>
+                            <p>{{testimonial.testimonial}}</p>
                         </div>
                     </div>
                 </div>
                 <!-- TESTIMONIAL 1 - END -->
-
-                <!-- TESTIMONIAL 2 - START -->
-                <div class="col-sm-6 scrollpoint sp-effect2">
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object img-circle"
-                                 src="image/suzanne.png" alt="">
-                        </a>
-
-                        <div class="media-body">
-                            <h4 class="media-heading">Miloš Milivojević</h4>
-                            <span>Webdesigner</span>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed
-                                volutpat est. Donec lobortis interdum volutpat. Maecenas bibendum
-                                dui quis pharetra tincidunt. Praesent posuere eu velit at
-                                scelerisque.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- TESTIMONIAL 2 - END -->
-
             </div>
 
         </div>
@@ -526,26 +486,43 @@
                             </div>
                             <div class="col-sm-4">
 
-                                <img src="image/fingolfintek.png"
-                                     class="contact-image image-responsive hidden-xs hidden-sm"
-                                     alt=""/>
-
                                 <div class="contact-info">
                                     <p>Miloš Milivojević</p>
 
-                                    <p>Belgrade, Serbia</p>
+                                    <!--<p>Belgrade, Serbia</p>-->
 
-                                    <p>
-                                        <a href="http://github.com/fingolfintek"
-                                           title="GitHub Profile">
-                                            <i class="fa fa-github"></i>
-                                        </a>
-                                        <a href="http://www.linkedin.com/in/fingolfintek"
-                                           title="LinkedIn Profile">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                    </p>
+                                    <!--<p>-->
+                                        <!--<a href="http://github.com/fingolfintek"-->
+                                           <!--title="GitHub Profile">-->
+                                            <!--<i class="fa fa-github"></i>-->
+                                        <!--</a>-->
+                                        <!--<a href="http://www.linkedin.com/in/fingolfintek"-->
+                                           <!--title="LinkedIn Profile">-->
+                                            <!--<i class="fa fa-linkedin"></i>-->
+                                        <!--</a>-->
+
+                                        <!--<a href="" class="hireme-widget-button hireme-widget-micro is-micro">-->
+                                            <!--<span class="btn-fl-bird"> Hire Me </span>-->
+                                        <!--</a>-->
+                                    <!--</p>-->
+
                                 </div>
+                                <div class='fln-hireme' data-username='fingolfintek' data-style='thin' data-type='badge'
+                                     data-bg='' data-theme=''></div>
+
+                                <script type='text/javascript'>(function (d) {
+                                    var po = d.createElement('script');
+                                    po.type = 'text/javascript';
+                                    po.async = true;
+                                    po.src = '//static.flnwdgt.com/build/js/hireme-sdk.js';
+                                    var s = d.getElementsByTagName('script')[0];
+                                    s.parentNode.insertBefore(po, s);
+                                })(document);</script>
+
+
+                                <!--<img src="image/fingolfintek.png"-->
+                                <!--class="contact-image image-responsive hidden-xs hidden-sm"-->
+                                <!--alt=""/>-->
                             </div>
                         </div>
                     </div>
@@ -569,17 +546,7 @@
                     <ul class="brands brands-inline">
                         <li>
                             <a href="#">
-                                <i class="fa fa-facebook  hi-icon-effect-8"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-github"></i>
                             </a>
                         </li>
                         <li>
@@ -589,11 +556,9 @@
                         </li>
                     </ul>
 
-                    <p>© Miloš Milivojević The Freelancer 2014 All right reserved. Designed by
-                        <a
-                                href="http://pixelized.cz" target="_blank" class="btn btn-footer">Pixelized
-                            Studio
-                        </a>
+                    <p>
+                        © Miloš Milivojević. All right reserved. Bootstrap theme by
+                        <a href="http://pixelized.cz" target="_blank" class="btn btn-footer">Pixelized Studio</a>
                     </p>
                 </div>
             </div>
@@ -618,7 +583,7 @@
     <script src="bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/controller.js"></script>
+    <script src="js/controllers.js"></script>
     <script>
         $(function () {
             $("input,textarea").jqBootstrapValidation({
